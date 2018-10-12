@@ -1,0 +1,8 @@
+﻿################################################################################
+# 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
+################################################################################
+
+/.vs
+/1005/OpenDataImport/.vs/OpenDataImport
+/1005/OpenDataImport/OpenDataImport/bin/Debug/netcoreapp2.1
+/1005/OpenDataImport/OpenDataImport/obj
