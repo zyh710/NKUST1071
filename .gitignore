@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs
+/1005/OpenDataImport/.vs/OpenDataImport
+/1005/OpenDataImport/OpenDataImport/bin/Debug/netcoreapp2.1
+/1005/OpenDataImport/OpenDataImport/obj
