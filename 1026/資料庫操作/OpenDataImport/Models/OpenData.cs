@@ -10,8 +10,5 @@ namespace OpenDataImport.Models
         public string 資料集名稱 { get; set; }
         public string 主要欄位說明 { get; set; }
         public string 服務分類 { get; set; }
-
-
-
     }
 }

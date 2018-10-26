@@ -21,6 +21,41 @@ namespace OpenDataImport.Repository
             }
             
         }
+
+        public List<OpenData> SelectAll(string name)
+        {
+            var result = new List<OpenData>();
+
+            var connection = new SqlConnection(ConnectionString);
+            connection.Open();
+
+
+            var command = new SqlCommand("", connection);
+            command.CommandText = string.Format(@"
+Select Id,服務分類, 資料集名稱, 主要欄位說明
+From OpenData");
+            if (!string.IsNullOrEmpty(name))
+                command.CommandText =
+                    $"{command.CommandText} Where 服務分類=N'{name}'";
+            //command.CommandText + "Where 服務分類=N'" + name+"'";
+            //command.Parameters.Add(new SqlParameter("p1", name));
+
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var item = new OpenData();
+                item.id= reader.GetInt32(0);
+                item.服務分類= reader.GetString(1);
+                item.資料集名稱 = reader.GetString(2);
+                item.主要欄位說明 = reader.GetString(3);
+                result.Add(item);
+            }
+
+
+
+            connection.Close();
+            return result;
+        }
         public void Insert(OpenData item)
         {
             var newItem = item;
@@ -42,11 +77,11 @@ VALUES              (N'{0}',N'{1}',N'{2}')
 
 
 
-//        public object Update(object item)
-//        {
-//            var updateItem = item as YC.Models.OpenData;
-//            var connection = new System.Data.SqlClient.SqlConnection(ConnectionString);
-//            connection.Open();
+        public object Update(OpenData item)
+        {
+            var updateItem = item;
+            var connection = new System.Data.SqlClient.SqlConnection(ConnectionString);
+            connection.Open();
 
 
 //            var command = new System.Data.SqlClient.SqlCommand("", connection);
@@ -62,27 +97,27 @@ VALUES              (N'{0}',N'{1}',N'{2}')
 
 //            command.ExecuteNonQuery();
 
-            
-//            connection.Close();
-//            return item;
-//        }
 
-//        public void Delete(string ID)
-//        {
-//            var connection = new System.Data.SqlClient.SqlConnection(ConnectionString);
-//            connection.Open();
+            connection.Close();
+            return item;
+        }
 
-
-//            var command = new System.Data.SqlClient.SqlCommand("", connection);
-//            command.CommandText = string.Format(@"
-//DELETE FROM [OpenData]
-// WHERE ID=N'{0}'
-//            ", ID);
-
-//            command.ExecuteNonQuery();
+        public void Delete(string ID)
+        {
+            var connection = new System.Data.SqlClient.SqlConnection(ConnectionString);
+            connection.Open();
 
 
-//            connection.Close();
-//        }
+            var command = new System.Data.SqlClient.SqlCommand("", connection);
+            command.CommandText = string.Format(@"
+        DELETE FROM [OpenData]
+         WHERE ID=N'{0}'
+                    ", ID);
+
+            command.ExecuteNonQuery();
+
+
+            connection.Close();
+        }
     }
 }

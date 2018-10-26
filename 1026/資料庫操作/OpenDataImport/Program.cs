@@ -13,9 +13,9 @@ namespace OpenDataImport
         {
             Service.ImportService importService = new Service.ImportService();
 
-            var nodes= importService.FindOpenData();
+            var nodes = importService.FindOpenDataFromDb("生育保健");//importService.FindOpenData();
 
-            importService.ImportToDb(nodes);
+            //importService.ImportToDb(nodes);
 
             showOpenData(nodes);
             Console.ReadKey();

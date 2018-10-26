@@ -10,8 +10,13 @@ namespace OpenDataImport.Service
 {
     public class ImportService
     {
+        private Repository.OpenDataRepository _repository;
+        public ImportService()
+        {
+            _repository = new Repository.OpenDataRepository();
+        }
 
-        public List<OpenData> FindOpenData()
+        public List<OpenData> FindOpenDataFromXml()
         {
             List<OpenData> result = new List<OpenData>();
 
@@ -41,14 +46,19 @@ namespace OpenDataImport.Service
             return result;
 
         }
+        public List<OpenData> FindOpenDataFromDb(string name)
+        {
+
+            return _repository.SelectAll(name);
+        }
 
 
         public void ImportToDb(List<OpenData> openDatas)
         {
-            Repository.OpenDataRepository Repository = new Repository.OpenDataRepository();
+            
             openDatas.ForEach(item =>
             {
-                Repository.Insert(item);
+                _repository.Insert(item);
             });
 
         }
