@@ -1,13 +1,14 @@
-﻿using Models;
+﻿
 using OpenDataImport.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace YC.Repository
+namespace OpenDataImport.Repository
 {
     public class OpenDataRepository
     {
@@ -15,23 +16,23 @@ namespace YC.Repository
         {
             get
             {
-                return "";//@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + YC.Shared.Utils.GetDataPath() + @"OpenData.mdf;Integrated Security=True";
+                return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Projects\NKUST1071\1018\資料庫操作\OpenDataImport\App_Data\Database.mdf;Integrated Security=True";
                 //return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+ Directory.GetCurrentDirectory() + @"\App_Data\nodeDB.mdf;Integrated Security=True";
             }
-            set => throw new NotImplementedException();
+            
         }
-        public void Create(OpenData item)
+        public void Insert(OpenData item)
         {
             var newItem = item;
-            var connection = new System.Data.SqlClient.SqlConnection(ConnectionString);
+            var connection = new SqlConnection(ConnectionString);
             connection.Open();
 
 
-            var command = new System.Data.SqlClient.SqlCommand("", connection);
-            //command.CommandText = string.Format(@"
-            //INSERT INTO OpenData(ID, 資料集名稱, 服務分類, 資料集描述, DisplaySqe)
-            //VALUES              ('{0}',N'{1}',N'{2}',N'{3}','{4}')
-            //", newItem.ID, newItem.資料集名稱, newItem.服務分類, newItem.資料集描述, newItem.ID);
+            var command = new SqlCommand("", connection);
+            command.CommandText = string.Format(@"
+INSERT INTO OpenData(服務分類, 資料集名稱, 主要欄位說明) 
+VALUES              (N'{0}',N'{1}',N'{2}')
+            ", newItem.服務分類, newItem.資料集名稱, newItem.主要欄位說明);
 
             command.ExecuteNonQuery();
 
