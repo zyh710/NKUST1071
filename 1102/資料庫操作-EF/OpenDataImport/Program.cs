@@ -11,7 +11,7 @@ namespace OpenDataImport
     {
         static void Main(string[] args)
         {
-            Service.ImportService importService = new Service.ImportService();
+            Service.EFImportService importService = new Service.EFImportService();
 
             var nodes = importService.FindOpenDataFromDb("生育保健");//importService.FindOpenData();
 
