@@ -1,7 +1,31 @@
-﻿
+﻿@model List<YC.Models.OpenData>
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>服務分類</th>
+            <th>資料集名稱</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.服務分類</td>
+                <td>@item.資料集名稱</td>
+            </tr>
+        }
+
+
+    </tbody>
+
+
+
+</table>
 

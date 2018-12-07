@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using YC.Database;
 
 namespace YC.Web.Controllers
 {
@@ -10,7 +11,11 @@ namespace YC.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            OpenDataDbContext db = new OpenDataDbContext();
+
+            List<YC.Models.OpenData> models = db.OpenData.ToList();
+
+            return View(models);
         }
     }
 }

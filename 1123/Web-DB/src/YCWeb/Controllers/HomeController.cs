@@ -4,16 +4,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using YC.Database;
-using YC.Web.Models;
+using YCWeb.Models;
 
-namespace YC.Web.Controllers
+namespace YCWeb.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-
+            YC.Database.OpenDataDbContext db = new YC.Database.OpenDataDbContext();
 
             return View();
         }
